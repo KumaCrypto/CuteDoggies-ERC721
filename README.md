@@ -2,8 +2,8 @@
 
 ## Plan:
 
-[] Basic NFT
+-   [] Basic NFT
 
-[] Random NFT
+-   [] Random NFT
 
-[] Dynamic SVG NFT
+-   [] Dynamic SVG NFT

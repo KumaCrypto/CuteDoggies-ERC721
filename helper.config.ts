@@ -1,0 +1,3 @@
+const CONFIRMATION_AMOUNT: number = 5;
+const DEV_CHAIN: number = 31337;
+export { CONFIRMATION_AMOUNT, DEV_CHAIN };

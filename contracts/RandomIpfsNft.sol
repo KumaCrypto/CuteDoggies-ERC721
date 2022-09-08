@@ -12,7 +12,6 @@ error RandomIpfsNft__TokenDoesNotExist();
 contract RandomIpfsNft is VRFConsumerBaseV2, ERC721URIStorage {
 	/* Type declaration */
 	enum Breed {
-		DEFAULT,
 		PUG,
 		SHIBA_INU,
 		ST_BERNARD
@@ -33,11 +32,6 @@ contract RandomIpfsNft is VRFConsumerBaseV2, ERC721URIStorage {
 	uint256 internal constant MAX_CHANCE_VALUE = 100;
 	uint256 private s_tokenCounter;
 	mapping(uint256 => Breed) private s_tokenIdToBreed;
-
-	modifier isTokenExist(uint256 tokenId) {
-		if (!_exists(tokenId)) revert RandomIpfsNft__TokenDoesNotExist();
-		_;
-	}
 
 	constructor(
 		address vrfCoordinatorV2,
@@ -112,32 +106,14 @@ contract RandomIpfsNft is VRFConsumerBaseV2, ERC721URIStorage {
 		public
 		view
 		override
-		isTokenExist(tokenId)
 		returns (string memory)
 	{
+		if (!_exists(tokenId)) revert RandomIpfsNft__TokenDoesNotExist();
+
 		string memory base = _baseURI();
 		string memory tokenUri = getDogiesUri(tokenId);
 
 		return string(abi.encodePacked(base, tokenUri));
-	}
-
-	function _baseURI() internal pure override returns (string memory) {
-		return "ipfs://QmZ5eVBhugNZBDV9LAZdJkA6bWTghhg2tbkv1KeXRPMNsw/";
-	}
-
-	function getDogiesUri(uint256 tokenId)
-		public
-		view
-		isTokenExist(tokenId)
-		returns (string memory)
-	{
-		Breed currentTokenBreed = s_tokenIdToBreed[tokenId];
-
-		if (currentTokenBreed == Breed.ST_BERNARD) {
-			return "st-bernard.png";
-		} else if (currentTokenBreed == Breed.SHIBA_INU) return "shiba-inu.png";
-
-		return "pug.png";
 	}
 
 	function getRequestidToSender(uint256 requestId)
@@ -178,5 +154,23 @@ contract RandomIpfsNft is VRFConsumerBaseV2, ERC721URIStorage {
 
 	function getCallBackGasLimit() external view returns (uint32) {
 		return i_callbackGasLimit;
+	}
+
+	function _baseURI() internal pure override returns (string memory) {
+		return "ipfs://QmZ5eVBhugNZBDV9LAZdJkA6bWTghhg2tbkv1KeXRPMNsw/";
+	}
+
+	function getDogiesUri(uint256 tokenId)
+		internal
+		view
+		returns (string memory)
+	{
+		Breed currentTokenBreed = s_tokenIdToBreed[tokenId];
+
+		if (currentTokenBreed == Breed.ST_BERNARD) {
+			return "st-bernard.png";
+		} else if (currentTokenBreed == Breed.SHIBA_INU) return "shiba-inu.png";
+
+		return "pug.png";
 	}
 }

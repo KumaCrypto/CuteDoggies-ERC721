@@ -1,8 +1,8 @@
-import { BasicNft, BasicNft__factory } from "../typechain-types";
+import { BasicNft, BasicNft__factory } from "../../typechain-types";
 import { ethers } from "hardhat";
 import { SignerWithAddress } from "@nomiclabs/hardhat-ethers/signers";
 
-async function fixture(): Promise<{
+async function fixtureBasicNft(): Promise<{
 	signer: SignerWithAddress;
 	basicNft: BasicNft;
 }> {
@@ -12,4 +12,5 @@ async function fixture(): Promise<{
 	return { signer, basicNft };
 }
 
-export default fixture;
+async function fixtureRandomNft() {}
+export { fixtureBasicNft, fixtureRandomNft };

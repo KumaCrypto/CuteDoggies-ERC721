@@ -1,5 +1,5 @@
 import { loadFixture } from "@nomicfoundation/hardhat-network-helpers";
-import fixture from "./fixture";
+import { fixtureBasicNft } from "./utils/fixture";
 
 import { expect } from "chai";
 import { BigNumber } from "ethers";
@@ -15,19 +15,21 @@ const TokenURI =
 	: describe("BasicNft", function () {
 			describe("Deploy", function () {
 				it("Counter value by default should be 0", async function () {
-					const { basicNft } = await loadFixture(fixture);
+					const { basicNft } = await loadFixture(fixtureBasicNft);
 					expect(await basicNft.getTokenCounter()).to.eq(0);
 				});
 
 				it("TokenURI should be correct", async function () {
-					const { basicNft } = await loadFixture(fixture);
+					const { basicNft } = await loadFixture(fixtureBasicNft);
 					expect(await basicNft.tokenURI(0)).to.eq(TokenURI);
 				});
 			});
 
 			describe("Mint", function () {
 				it("Balance should be increased", async function () {
-					const { basicNft, signer } = await loadFixture(fixture);
+					const { basicNft, signer } = await loadFixture(
+						fixtureBasicNft
+					);
 					const balanceBefore: BigNumber = await basicNft.balanceOf(
 						signer.address
 					);
@@ -41,7 +43,7 @@ const TokenURI =
 				});
 
 				it("Should icrement counter when nft minted", async function () {
-					const { basicNft } = await loadFixture(fixture);
+					const { basicNft } = await loadFixture(fixtureBasicNft);
 					await basicNft.mint();
 					await basicNft.mint();
 

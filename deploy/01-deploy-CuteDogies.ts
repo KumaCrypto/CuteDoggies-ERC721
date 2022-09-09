@@ -69,8 +69,10 @@ const deployCuteDogies: DeployFunction = async (
 		waitConfirmations: confitmations,
 	})) as unknown as CuteDogies;
 
-	//  TODO CHECK WHY NOT IMPLEMENTED
-	await vrfCoordinator!.addConsumer(subId, vrfCoordinatorAddress);
+	// In lates version it isn't requred in mocks
+	if (!isDevChain)
+		await vrfCoordinator!.addConsumer(subId, vrfCoordinatorAddress);
+
 	if (!isDevChain && process.env.ETHERSCAN_API_KEY)
 		await verify(CuteDogies.address, args);
 	log("----------------------------------------");

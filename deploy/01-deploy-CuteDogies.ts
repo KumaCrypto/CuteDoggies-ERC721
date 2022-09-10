@@ -82,3 +82,5 @@ const deployCuteDogies: DeployFunction = async (
 
 deployCuteDogies.tags = ["all", "CuteDogies"];
 export default deployCuteDogies;
+
+async function handleTokensUri() {}

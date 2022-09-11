@@ -195,7 +195,7 @@ contract CuteDogies is VRFConsumerBaseV2, ERC721, Ownable {
 	}
 
 	function _baseURI() internal pure override returns (string memory) {
-		return "ipfs://QmZ5eVBhugNZBDV9LAZdJkA6bWTghhg2tbkv1KeXRPMNsw/";
+		return "ipfs://Qma1ewwyXeZoiMfwNVcjeR14S2QVgeNJE5UhZEkL6SCZnp/";
 	}
 
 	function getDogiesUri(uint256 tokenId)
@@ -206,9 +206,10 @@ contract CuteDogies is VRFConsumerBaseV2, ERC721, Ownable {
 		Breed currentTokenBreed = s_tokenIdToBreed[tokenId];
 
 		if (currentTokenBreed == Breed.ST_BERNARD) {
-			return "st-bernard.png";
-		} else if (currentTokenBreed == Breed.SHIBA_INU) return "shiba-inu.png";
+			return "st-bernard.json";
+		} else if (currentTokenBreed == Breed.SHIBA_INU)
+			return "shiba-inu.json";
 
-		return "pug.png";
+		return "pug.json";
 	}
 }

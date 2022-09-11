@@ -19,7 +19,7 @@ const deployCuteDogies: DeployFunction = async (
 	hre: HardhatRuntimeEnvironment
 ) => {
 	const { deployments, getNamedAccounts } = hre;
-	const { log, deploy, get } = deployments;
+	const { log, deploy } = deployments;
 	const { deployer } = await getNamedAccounts();
 
 	let vrfCoordinatorAddress: string,
@@ -62,6 +62,7 @@ const deployCuteDogies: DeployFunction = async (
 		callbackGasLimit,
 		mintFee,
 	];
+
 	const CuteDogies: CuteDogies = (await deploy("CuteDogies", {
 		from: deployer,
 		args: args,
@@ -82,5 +83,3 @@ const deployCuteDogies: DeployFunction = async (
 
 deployCuteDogies.tags = ["all", "CuteDogies"];
 export default deployCuteDogies;
-
-async function handleTokensUri() {}

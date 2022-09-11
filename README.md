@@ -2,8 +2,6 @@
 
 ## Plan:
 
--   [ ] Basic NFT
-
 -   [ ] Random NFT
 
 -   [ ] Dynamic SVG NFT
@@ -12,4 +10,6 @@
 
 # TODO:
 
--   Change ipfs links in contract
+-   [ ] Unit tests
+-   [ ] Integration tests
+-   [ ] Deploy to testnet

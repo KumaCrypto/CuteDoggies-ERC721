@@ -90,7 +90,9 @@ async function deployImages(imagesFilePath: string) {
 			`${fullImagesPath}/${indexFile}`
 		);
 
-		const response = await deployToIpfs(readableStreamForFile);
+		const response: pinataSDK.PinataPinResponse = await deployToIpfs(
+			readableStreamForFile
+		);
 		responses.push(response);
 	}
 

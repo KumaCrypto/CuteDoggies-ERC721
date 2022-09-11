@@ -17,8 +17,7 @@ const pinata: pinataSDK.PinataClient = pinataSDK.default(
 
 async function deployMetadata() {
 	if (process.env.DEPLOY_TO_PINATA !== "true")
-		throw new Error("DEPLOY_TO_PINATA in .env equals to false ");
-
+		throw new Error("DEPLOY_TO_PINATA in .env equals to false!");
 	// Deploy images to IPFS (pinata) and getting list of files.
 	const { URIs, files } = await deployImages(pathToImages);
 
@@ -28,44 +27,17 @@ async function deployMetadata() {
 	);
 
 	// Get full path to the metadata.
-	const metadataResolvedPath = path.resolve(metadataPath);
+	const metadataResolvedPath: string = path.resolve(metadataPath);
 
-	for (let currentIndex = 0; currentIndex < URIs.length; currentIndex++) {
-		// Get token name from filename
-		const currentTokenName = tokenNames[currentIndex];
+	// Create and store metadata from received URIs, tokenNames to metadataResolvedPath.
+	createAndStoreMetadata(URIs, tokenNames, metadataResolvedPath);
 
-		// Create metadata for current token
-		const tokenMetadata: metadata = {
-			name: currentTokenName,
-			description: `An adorable ${currentTokenName} pup`,
-			image: `ipfs://${URIs[currentIndex]}`,
-			attributes: [
-				{
-					trait_type: "cuteness",
-					value: Math.round(Math.random() * 100),
-				},
-			],
-		};
-
-		// If dir for token metadata does not exist, create it
-		if (!fs.existsSync(metadataResolvedPath))
-			fs.mkdirSync(metadataResolvedPath);
-
-		const pathToTokenMetadata =
-			metadataResolvedPath + "/" + currentTokenName + ".json";
-
-		// If file does not exist, create it
-		if (!fs.existsSync(pathToTokenMetadata))
-			fs.createFileSync(pathToTokenMetadata);
-
-		// Write token metadata to file
-		fs.writeJSONSync(pathToTokenMetadata, tokenMetadata);
-	}
-
-	// Get pin resposne from PinataSDK
+	console.log("Deploying metadata to IPFS...");
+	// Deploy to IPFS(Pinata) and receive resposne from them
 	const deployResponse: pinataSDK.PinataPinResponse = await deployToIpfs(
 		metadataResolvedPath
 	);
+	console.log("Deployed!");
 
 	// Add current metadataTokenURI to array
 	const metadataURIs: Array<tokenURI> = tokenNames.map((currentTokenName) => {
@@ -89,12 +61,55 @@ async function deployMetadata() {
 	// Write array of token URIs to file
 	fs.writeJSONSync(pathToSaveMetadataURI, metadataURIs);
 
-	console.log("All tokens metadata deployed to IPFS!");
-	console.log(`URI's saved to ${pathToSaveMetadataURI}`);
+	console.log("All tokens metadata created and deployed to IPFS!");
+	console.log(`URI's saved at ${pathToSaveMetadataURI}`);
+}
+
+// Create and store metadata for every pup - locally
+function createAndStoreMetadata(
+	URIs: Array<string>,
+	tokenNames: Array<string>,
+	metadataResolvedPath: string
+) {
+	console.log("Creating metadata...");
+
+	for (let currentIndex = 0; currentIndex < URIs.length; currentIndex++) {
+		// Get token name from filename
+		const currentTokenName: string = tokenNames[currentIndex];
+
+		// Create metadata for current token
+		const tokenMetadata: metadata = {
+			name: currentTokenName,
+			description: `An adorable ${currentTokenName} pup`,
+			image: `ipfs://${URIs[currentIndex]}`,
+			attributes: [
+				{
+					trait_type: "cuteness",
+					value: Math.round(Math.random() * 100),
+				},
+			],
+		};
+
+		// If dir for token metadata does not exist, create it
+		if (!fs.existsSync(metadataResolvedPath))
+			fs.mkdirSync(metadataResolvedPath);
+
+		const pathToTokenMetadata: string =
+			metadataResolvedPath + "/" + currentTokenName + ".json";
+
+		// If file does not exist, create it
+		if (!fs.existsSync(pathToTokenMetadata))
+			fs.createFileSync(pathToTokenMetadata);
+
+		// Write token metadata to file
+		fs.writeJSONSync(pathToTokenMetadata, tokenMetadata);
+	}
+
+	console.log("Metadata created!");
 }
 
 /* Deploy directory to IPFS (Pinata)  */
-async function deployToIpfs(dir: string) {
+async function deployToIpfs(dir: string): Promise<pinataSDK.PinataPinResponse> {
 	/*
         Using pinFromFS instead pinFileToIPFS,
         because in pinFromFS we upload directory so root URI will be same
@@ -107,18 +122,21 @@ async function deployToIpfs(dir: string) {
 }
 
 /* Deploy images to IPFS(Pinata)*/
-async function deployImages(imagesFilePath: string) {
+async function deployImages(
+	imagesFilePath: string
+): Promise<{ URIs: Array<string>; files: Array<string> }> {
+	console.log("Deploying images to IPFS!");
 	// resolve => create full path, from "./metadata/RandomDogies" to "/Users/UserName/Dir/Dir/Dir"
 	const fullImagesPath = path.resolve(imagesFilePath);
 
 	// All files from directory
-	const files = fs.readdirSync(fullImagesPath);
+	const files: Array<string> = fs.readdirSync(fullImagesPath);
 
 	const response: pinataSDK.PinataPinResponse = await deployToIpfs(
 		fullImagesPath
 	);
 
-	console.log("Images deployed to IPFS!");
+	console.log("Images deployed!");
 
 	// Calculate URI for every uploaded image
 	// Example: QmZ5eVBhugNZBDV9LAZdJkA6bWTghhg2tbkv1KeXRPMNsw/pug.png

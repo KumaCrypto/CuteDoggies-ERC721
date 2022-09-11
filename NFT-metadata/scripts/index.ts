@@ -1,7 +1,7 @@
-import { handleTokenUris } from "./deployMetadata";
+import { deployMetadata } from "./deployMetadata";
 
 async function main() {
-	await handleTokenUris();
+	await deployMetadata();
 }
 
 main().catch((e: any) => {

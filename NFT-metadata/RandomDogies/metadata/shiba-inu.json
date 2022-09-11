@@ -1,0 +1,6 @@
+{
+	"name": "shiba-inu",
+	"description": "An adorable shiba-inu pup",
+	"image": "ipfs://QmZ5eVBhugNZBDV9LAZdJkA6bWTghhg2tbkv1KeXRPMNsw/shiba-inu.png",
+	"attributes": [{ "trait_type": "cuteness", "value": 51 }]
+}

@@ -12,7 +12,6 @@ type networkConfigType = {
 type networkConfigArgs = {
 	name: string;
 	gasLane: string;
-	interval: string;
 	mintFee: BigNumber;
 	callbackGasLimit: string;
 	vrfV2Coordinator?: string;
@@ -24,7 +23,6 @@ const networkConfig: networkConfigType = {
 		name: "goerli",
 		gasLane:
 			"0x79d3d8832d904592c0bf9818b621522c988bb8b0c05cdc3b15aea1b6e8db0c15",
-		interval: "30",
 		mintFee: ethers.utils.parseEther("0.1"),
 		callbackGasLimit: "500000",
 		vrfV2Coordinator: "0x2Ca8E0C643bDe4C2E08ab1fA0da3401AdAD7734D",
@@ -35,7 +33,6 @@ const networkConfig: networkConfigType = {
 		name: "hardhat",
 		gasLane:
 			"0x79d3d8832d904592c0bf9818b621522c988bb8b0c05cdc3b15aea1b6e8db0c15",
-		interval: "30",
 		mintFee: ethers.utils.parseEther("0.1"),
 		callbackGasLimit: "500000",
 	},

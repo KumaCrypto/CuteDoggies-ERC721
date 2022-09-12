@@ -1,6 +1,7 @@
 import type { DeployFunction } from "hardhat-deploy/dist/types";
 import type { HardhatRuntimeEnvironment } from "hardhat/types";
-import type { CuteDogies, VRFCoordinatorV2Mock } from "../typechain-types";
+import type { CuteDoggies, VRFCoordinatorV2Mock } from "../typechain-types";
+import type { BigNumber } from "ethers";
 
 import verify from "../scripts/utils/verify";
 import { ethers, network } from "hardhat";
@@ -12,10 +13,12 @@ import {
 
 const chainId: number = network.config.chainId!;
 const isDevChain: boolean = chainId === DEV_CHAIN_ID;
-/* If dev chain => confirmations = 1 */
+
+/* If dev chain => confirmations = 1 else confirmations fron networkConfig */
 const confitmations: number = isDevChain ? 1 : CONFIRMATION_AMOUNT;
 
-const deployCuteDogies: DeployFunction = async (
+const FUND_AMOUNT: BigNumber = ethers.utils.parseEther("10");
+const deployCuteDoggies: DeployFunction = async (
 	hre: HardhatRuntimeEnvironment
 ) => {
 	const { deployments, getNamedAccounts } = hre;
@@ -39,6 +42,7 @@ const deployCuteDogies: DeployFunction = async (
 			throw new Error("Error while creating subscription!");
 
 		subId = createSubscriptionTxReceipt.events![0].args!.subId.toString();
+		await vrfCoordinator.fundSubscription(subId, FUND_AMOUNT);
 	} else {
 		vrfCoordinatorAddress = networkConfig[chainId].vrfV2Coordinator!;
 		vrfCoordinator = await ethers.getContractAt(
@@ -63,12 +67,12 @@ const deployCuteDogies: DeployFunction = async (
 		mintFee,
 	];
 
-	const CuteDogies: CuteDogies = (await deploy("CuteDogies", {
+	const CuteDoggies: CuteDoggies = (await deploy("CuteDoggies", {
 		from: deployer,
 		args: args,
 		log: true,
 		waitConfirmations: confitmations,
-	})) as unknown as CuteDogies;
+	})) as unknown as CuteDoggies;
 
 	/*
     In @chainlink/contracts/src/v0.8/mocks/VRFCoordinatorV2Mock.sol npm version 0.4.1 addConsumer is not impelemnted,
@@ -77,9 +81,9 @@ const deployCuteDogies: DeployFunction = async (
 	await vrfCoordinator!.addConsumer(subId, vrfCoordinatorAddress);
 
 	if (!isDevChain && process.env.ETHERSCAN_API_KEY)
-		await verify(CuteDogies.address, args);
+		await verify(CuteDoggies.address, args);
 	log("----------------------------------------");
 };
 
-deployCuteDogies.tags = ["all", "CuteDogies"];
-export default deployCuteDogies;
+deployCuteDoggies.tags = ["all", "CuteDoggies"];
+export default deployCuteDoggies;

@@ -1,16 +1,22 @@
-import { BasicNft, BasicNft__factory } from "../../typechain-types";
+import type { SignerWithAddress } from "@nomiclabs/hardhat-ethers/signers";
+import type { CuteDoggies } from "../../typechain-types";
+
 import { ethers } from "hardhat";
-import { SignerWithAddress } from "@nomiclabs/hardhat-ethers/signers";
+import { deployments } from "hardhat";
 
-async function fixtureBasicNft(): Promise<{
-	signer: SignerWithAddress;
-	basicNft: BasicNft;
+async function fixtureCuteDoggies(): Promise<{
+	signers: Array<SignerWithAddress>;
+	owner: SignerWithAddress;
+	cuteDoggies: CuteDoggies;
 }> {
-	const [signer]: SignerWithAddress[] = await ethers.getSigners();
-	const basicNft: BasicNft = await new BasicNft__factory(signer).deploy();
+	const signers: SignerWithAddress[] = await ethers.getSigners();
+	const [owner]: SignerWithAddress[] = signers;
 
-	return { signer, basicNft };
+	const cuteDoggies: CuteDoggies = (await deployments.fixture(
+		"CuteDoggies"
+	)) as unknown as CuteDoggies;
+
+	return { signers, owner, cuteDoggies };
 }
 
-async function fixtureRandomNft() {}
-export { fixtureBasicNft, fixtureRandomNft };
+export { fixtureCuteDoggies };

@@ -6,7 +6,7 @@ import { fixtureCuteDoggies } from "./utils/fixture";
 
 !(network.config.chainId === DEV_CHAIN_ID)
 	? describe.skip
-	: describe("RandomNFT", function () {
+	: describe("CuteDoggies", function () {
 			describe("Deploy || Variable initializing", function () {
 				it("Should be deployed", async function () {
 					const {} = await loadFixture(fixtureCuteDoggies);

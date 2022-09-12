@@ -78,7 +78,7 @@ const deployCuteDoggies: DeployFunction = async (
     In @chainlink/contracts/src/v0.8/mocks/VRFCoordinatorV2Mock.sol npm version 0.4.1 addConsumer is not impelemnted,
     but in 0.4.2 we should to add consumers
     */
-	await vrfCoordinator!.addConsumer(subId, vrfCoordinatorAddress);
+	await vrfCoordinator!.addConsumer(subId, CuteDoggies.address);
 
 	if (!isDevChain && process.env.ETHERSCAN_API_KEY)
 		await verify(CuteDoggies.address, args);

@@ -17,7 +17,7 @@ const isDevChain: boolean = chainId === DEV_CHAIN_ID;
 /* If dev chain => confirmations = 1 else confirmations fron networkConfig */
 const confitmations: number = isDevChain ? 1 : CONFIRMATION_AMOUNT;
 
-const FUND_AMOUNT: BigNumber = ethers.utils.parseEther("10");
+const FUND_AMOUNT: BigNumber = ethers.utils.parseEther("1000");
 const deployCuteDoggies: DeployFunction = async (
 	hre: HardhatRuntimeEnvironment
 ) => {

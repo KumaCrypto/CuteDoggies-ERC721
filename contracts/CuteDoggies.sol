@@ -183,6 +183,11 @@ contract CuteDoggies is VRFConsumerBaseV2, ERC721, Ownable {
 		return s_requestIdToSender[requestId];
 	}
 
+	// Created only for explorers
+	function totalSupply() external view returns (uint256) {
+		return s_tokenCounter - 1;
+	}
+
 	function getTokenCounter() external view returns (uint256) {
 		return s_tokenCounter;
 	}

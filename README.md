@@ -2,6 +2,5 @@
 
 ## Plan:
 
--   [ ] Unit tests (_70% / 100%_)
--   [ ] Integration tests (_0%_)
+-   [ ] Unit tests (100% / 100%)
 -   [ ] Deploy to testnet (-)

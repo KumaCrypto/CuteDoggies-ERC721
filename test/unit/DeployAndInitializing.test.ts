@@ -268,5 +268,31 @@ const baseURI: string =
 
 					expect(returnedTokenURI).to.eq(correctURI);
 				});
+
+				it("tokenURI | if token does not exist tokenURI should be reverted", async function () {
+					const { cuteDoggies } = await loadFixture(
+						fixtureCuteDoggies
+					);
+
+					await expect(
+						cuteDoggies.tokenURI(1)
+					).to.be.revertedWithCustomError(
+						cuteDoggies,
+						"CuteDoggies__TokenDoesNotExist"
+					);
+				});
+
+				it("getTokenBreed | if token does not exist should be reverted", async function () {
+					const { cuteDoggies } = await loadFixture(
+						fixtureCuteDoggies
+					);
+
+					await expect(
+						cuteDoggies.getTokenBreed(1)
+					).to.be.revertedWithCustomError(
+						cuteDoggies,
+						"CuteDoggies__TokenDoesNotExist"
+					);
+				});
 			});
 	  });

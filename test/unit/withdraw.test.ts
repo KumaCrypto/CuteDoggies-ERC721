@@ -87,6 +87,7 @@ const mintFeeFromConfig: BigNumber = networkConfig[DEV_CHAIN_ID].mintFee;
 						"CuteDoggies__LowLevelCallFailed"
 					);
 				});
+
 				it("Event FundsWithdrawn should be emitted when transfer was successful", async function () {
 					const { cuteDoggies, owner } = await loadFixture(
 						fixtureCuteDoggies

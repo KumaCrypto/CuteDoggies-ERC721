@@ -1,10 +1,13 @@
-import { network } from "hardhat";
-import { DEV_CHAIN_ID, networkConfig } from "../../helper.config";
-
 import { loadFixture } from "@nomicfoundation/hardhat-network-helpers";
 import { fixtureCuteDoggies } from "../utils/fixture";
 
+import { BigNumber, PopulatedTransaction } from "ethers";
+import { network } from "hardhat";
+
+import { DEV_CHAIN_ID, networkConfig } from "../../helper.config";
 import { expect } from "chai";
+
+const mintFeeFromConfig = networkConfig[DEV_CHAIN_ID].mintFee;
 
 !(network.config.chainId === DEV_CHAIN_ID)
 	? describe.skip
@@ -51,14 +54,55 @@ import { expect } from "chai";
 						.to.emit(cuteDoggies, "NFTRequested")
 						.withArgs(owner.address, 1);
 				});
-				it("Should be deployed", async function () {
-					const {} = await loadFixture(fixtureCuteDoggies);
+
+				it("Request 2 NFT to 1 user should mint 2 NFT", async function () {
+					const { cuteDoggies, VRFCoordinator, owner } =
+						await loadFixture(fixtureCuteDoggies);
+
+					/* First req */
+					await cuteDoggies.requestNFT({
+						value: mintFeeFromConfig,
+					});
+
+					/* Second req */
+					await cuteDoggies.requestNFT({
+						value: mintFeeFromConfig,
+					});
+
+					/* Answer to first req */
+					await VRFCoordinator.fulfillRandomWords(
+						1,
+						cuteDoggies.address
+					);
+
+					/* Answer to second req */
+					await VRFCoordinator.fulfillRandomWords(
+						2,
+						cuteDoggies.address
+					);
+
+					const balance: BigNumber = await cuteDoggies.balanceOf(
+						owner.address
+					);
+
+					expect(balance).to.eq(2);
 				});
-				it("Should be deployed", async function () {
-					const {} = await loadFixture(fixtureCuteDoggies);
-				});
-				it("Should be deployed", async function () {
-					const {} = await loadFixture(fixtureCuteDoggies);
+			});
+
+			describe("Receive", function () {
+				it("Receive should call _requestNFT", async function () {
+					const { cuteDoggies, owner } = await loadFixture(
+						fixtureCuteDoggies
+					);
+
+					const tx: PopulatedTransaction = {
+						to: cuteDoggies.address,
+						value: mintFeeFromConfig,
+					};
+
+					await expect(owner.sendTransaction(tx))
+						.to.emit(cuteDoggies, "NFTRequested")
+						.withArgs(owner.address, 1);
 				});
 			});
 	  });

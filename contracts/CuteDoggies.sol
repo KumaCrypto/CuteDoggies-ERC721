@@ -59,21 +59,9 @@ contract CuteDoggies is VRFConsumerBaseV2, ERC721, Ownable {
 		i_mintFee = mintFee;
 	}
 
-	/* User can request NFT mint and create request to VRF Coordinator V2 */
-	function requestNFT() external payable returns (uint256 requestId) {
-		if (msg.value < i_mintFee)
-			revert CuteDoggies__NeedMoreETHSent(msg.value, i_mintFee);
-
-		requestId = i_vrfCoordinator.requestRandomWords(
-			i_gasLane,
-			i_subId,
-			REQUEST_CONFIRMATIONS,
-			i_callbackGasLimit,
-			NUM_WORDS
-		);
-
-		s_requestIdToSender[requestId] = msg.sender;
-		emit NFTRequested(msg.sender, requestId);
+	/* See _requestNFT function */
+	function requestNFT() external payable {
+		_requestNFT();
 	}
 
 	/* VRF Coordinator V2 will answer to the user request and mint random NFT */
@@ -97,6 +85,21 @@ contract CuteDoggies is VRFConsumerBaseV2, ERC721, Ownable {
 		s_tokenIdToBreed[newTokenId] = currentDogBreed;
 
 		emit NFTMinted(tokenOwner, requestId, currentDogBreed);
+	}
+
+	function withdraw(address payable to, uint256 amount) external onlyOwner {
+		if (to == address(0)) revert CuteDoggies__TransferToTheZeroAddress();
+		if (amount == 0 || amount > address(this).balance)
+			revert CuteDoggies__IncorrectAmountValue();
+
+		(bool isSuccess, ) = to.call{value: amount}("");
+		if (!isSuccess) revert CuteDoggies__LowLevelCallFailed();
+		emit FundsWithdrawn(to, amount);
+	}
+
+	/* See _requestNFT function */
+	receive() external payable {
+		_requestNFT();
 	}
 
 	/* Get breed for random NFT */
@@ -127,14 +130,21 @@ contract CuteDoggies is VRFConsumerBaseV2, ERC721, Ownable {
 		revert CuteDoggies__RangeOutOfBounds(MAX_CHANCE_VALUE, modedRng);
 	}
 
-	function withdraw(address payable to, uint256 amount) external onlyOwner {
-		if (to == address(0)) revert CuteDoggies__TransferToTheZeroAddress();
-		if (amount == 0 || amount > address(this).balance)
-			revert CuteDoggies__IncorrectAmountValue();
+	/* Request a random word and create CuteDoggie NFT for sender */
+	function _requestNFT() private {
+		if (msg.value < i_mintFee)
+			revert CuteDoggies__NeedMoreETHSent(msg.value, i_mintFee);
 
-		(bool isSuccess, ) = to.call{value: amount}("");
-		if (!isSuccess) revert CuteDoggies__LowLevelCallFailed();
-		emit FundsWithdrawn(to, amount);
+		uint256 requestId = i_vrfCoordinator.requestRandomWords(
+			i_gasLane,
+			i_subId,
+			REQUEST_CONFIRMATIONS,
+			i_callbackGasLimit,
+			NUM_WORDS
+		);
+
+		s_requestIdToSender[requestId] = msg.sender;
+		emit NFTRequested(msg.sender, requestId);
 	}
 
 	/* Getters */
@@ -150,6 +160,11 @@ contract CuteDoggies is VRFConsumerBaseV2, ERC721, Ownable {
 		string memory tokenUri = getDoggiesUri(tokenId);
 
 		return string(abi.encodePacked(base, tokenUri));
+	}
+
+	function getTokenBreed(uint256 tokenId) external view returns (Breed) {
+		if (!_exists(tokenId)) revert CuteDoggies__TokenDoesNotExist();
+		return s_tokenIdToBreed[tokenId];
 	}
 
 	function getChanceArray() public pure returns (uint256[3] memory) {

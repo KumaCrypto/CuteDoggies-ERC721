@@ -60,6 +60,11 @@ contract CuteDoggies is VRFConsumerBaseV2, ERC721, Ownable {
 	}
 
 	/* See _requestNFT function */
+	receive() external payable {
+		_requestNFT();
+	}
+
+	/* See _requestNFT function */
 	function requestNFT() external payable {
 		_requestNFT();
 	}
@@ -87,6 +92,7 @@ contract CuteDoggies is VRFConsumerBaseV2, ERC721, Ownable {
 		emit NFTMinted(tokenOwner, requestId, currentDogBreed);
 	}
 
+	/* Owner can withdraw earned funds */
 	function withdraw(address payable to, uint256 amount) external onlyOwner {
 		if (to == address(0)) revert CuteDoggies__TransferToTheZeroAddress();
 		if (amount == 0 || amount > address(this).balance)
@@ -95,11 +101,6 @@ contract CuteDoggies is VRFConsumerBaseV2, ERC721, Ownable {
 		(bool isSuccess, ) = to.call{value: amount}("");
 		if (!isSuccess) revert CuteDoggies__LowLevelCallFailed();
 		emit FundsWithdrawn(to, amount);
-	}
-
-	/* See _requestNFT function */
-	receive() external payable {
-		_requestNFT();
 	}
 
 	/* Get breed for random NFT */

@@ -91,7 +91,7 @@ import { anyValue } from "@nomicfoundation/hardhat-chai-matchers/withArgs";
 					);
 
 					/* If does not exist will be reverted*/
-					const tokenBreed: string = await cuteDoggies.getTokenBreed(
+					const tokenBreed: number = await cuteDoggies.getTokenBreed(
 						1
 					);
 

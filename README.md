@@ -22,23 +22,23 @@ You can read more about what ChainlinkVRF V2 is by following this [link](https:/
 
 ---
 
-# Navigation:
+### Navigation:
 
--   [Getting Started](https://github.com/KumaCrypto/NFT-fcc#getting-started)
-    -   [Requirements](https://github.com/KumaCrypto/NFT-fcc#requirements)
-    -   [Quickstart](https://github.com/KumaCrypto/NFT-fcc#quickstart)
--   [Usage](https://github.com/KumaCrypto/NFT-fcc#usage)
+-   [Getting Started](https://github.com/KumaCrypto/CuteDoggies-ERC721#getting-started)
+    -   [Requirements](https://github.com/KumaCrypto/CuteDoggies-ERC721#requirements)
+    -   [Quickstart](https://github.com/KumaCrypto/CuteDoggies-ERC721#quickstart)
+-   [Usage](https://github.com/KumaCrypto/CuteDoggies-ERC721#usage)
 
-    -   [Deploy](https://github.com/KumaCrypto/NFT-fcc#deploy)
-    -   [Deploy](https://github.com/KumaCrypto/NFT-fcc#deploy)
-    -   [Testing](https://github.com/KumaCrypto/NFT-fcc#testing)
-        -   [Test coverage](https://github.com/KumaCrypto/NFT-fcc#test-coverage)
-    -   [Get one of the CuteDoggies pups](https://github.com/KumaCrypto/NFT-fcc#get-one-of-the-cutedoggies-pups)
-    -   [Withdraw](https://github.com/KumaCrypto/NFT-fcc#withdraw)
+    -   [Deploy](https://github.com/KumaCrypto/CuteDoggies-ERC721#deploy)
+    -   [Deploy](https://github.com/KumaCrypto/CuteDoggies-ERC721#deploy)
+    -   [Testing](https://github.com/KumaCrypto/CuteDoggies-ERC721#testing)
+        -   [Test coverage](https://github.com/KumaCrypto/CuteDoggies-ERC721#test-coverage)
+    -   [Get one of the CuteDoggies pups](https://github.com/KumaCrypto/CuteDoggies-ERC721#get-one-of-the-cutedoggies-pups)
+    -   [Withdraw](https://github.com/KumaCrypto/CuteDoggies-ERC721#withdraw)
 
--   [Contributing](https://github.com/KumaCrypto/NFT-fcc#contributing)
--   [Author](https://github.com/KumaCrypto/NFT-fcc#author)
--   [License](https://github.com/KumaCrypto/NFT-fcc#license)
+-   [Contributing](https://github.com/KumaCrypto/CuteDoggies-ERC721#contributing)
+-   [Author](https://github.com/KumaCrypto/CuteDoggies-ERC721#author)
+-   [License](https://github.com/KumaCrypto/CuteDoggies-ERC721#license)
 
 # Getting Started
 
@@ -55,7 +55,7 @@ You can read more about what ChainlinkVRF V2 is by following this [link](https:/
 <p>Clone repository from git:</p>
 
 ```bash
-git clone https://github.com/KumaCrypto/NFT-fcc.git
+git clone https://github.com/KumaCrypto/CuteDoggies-ERC721.git
 ```
 
 ```bash

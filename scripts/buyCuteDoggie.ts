@@ -1,6 +1,6 @@
+import fs from "fs-extra";
 import { ethers, deployments, network } from "hardhat";
 import { networkConfig } from "../helper.config";
-import fs from "fs-extra";
 
 import type { SignerWithAddress } from "@nomiclabs/hardhat-ethers/signers";
 import type {
@@ -12,7 +12,7 @@ import type { CuteDoggies } from "../typechain-types";
 const { get } = deployments;
 
 // TODO You can change this values to your own :)
-const contractAddress: string = "";
+const contractAddress: string = "0x0864ABa35d2e12637721DC10df155261F4a7E525";
 const reqConfirmatioms: number | null = null;
 
 async function main() {

@@ -5,9 +5,9 @@ import * as path from "path";
 import fs from "fs-extra";
 
 /* PATH */
-const metadataPath: string = "NFT-metadata/CuteDogies/metadata";
-const pathToImages: string = "NFT-metadata/CuteDogies/images/";
-const pathToSaveMetadataURI: string = "NFT-metadata/CuteDogies/URI/URIs.json";
+const metadataPath: string = "NFT-metadata/CuteDoggies/metadata";
+const pathToImages: string = "NFT-metadata/CuteDoggies/images/";
+const pathToSaveMetadataURI: string = "NFT-metadata/CuteDoggies/URI/URIs.json";
 
 /* Init pinata client */
 const pinata: pinataSDK.PinataClient = pinataSDK.default(
@@ -126,7 +126,7 @@ async function deployImages(
 	imagesFilePath: string
 ): Promise<{ URIs: Array<string>; files: Array<string> }> {
 	console.log("Deploying images to IPFS!");
-	// resolve => create full path, from "./metadata/CuteDogies" to "/Users/UserName/Dir/Dir/Dir"
+	// resolve => create full path, from "./metadata/CuteDoggies" to "/Users/UserName/Dir/Dir/Dir"
 	const fullImagesPath = path.resolve(imagesFilePath);
 
 	// All files from directory

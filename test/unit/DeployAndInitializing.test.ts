@@ -294,26 +294,5 @@ const baseURI: string =
 						"CuteDoggies__TokenDoesNotExist"
 					);
 				});
-
-				it("totalSupply | Return correct value", async function () {
-					const { cuteDoggies, VRFCoordinator, owner } =
-						await loadFixture(fixtureCuteDoggies);
-
-					/* First req */
-					await cuteDoggies.requestNFT({
-						value: mintFeeFromConfig,
-					});
-
-					/* Answer to first req */
-					await VRFCoordinator.fulfillRandomWords(
-						1,
-						cuteDoggies.address
-					);
-
-					const totalSupply: BigNumber =
-						await cuteDoggies.totalSupply();
-
-					expect(totalSupply).to.eq(0);
-				});
 			});
 	  });

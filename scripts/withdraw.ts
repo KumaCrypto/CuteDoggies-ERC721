@@ -1,7 +1,7 @@
+import fs from "fs-extra";
+
 import { ethers, deployments } from "hardhat";
 const { get } = deployments;
-
-import fs from "fs-extra";
 
 import type { BigNumber } from "ethers";
 import type { CuteDoggies } from "../typechain-types";

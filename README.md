@@ -1,4 +1,4 @@
-# CuteDoggies
+# CuteDoggies | Random NFT collection
 
 <p> This is a NFT collection of the cutest puppies - the ERC-721 standard. When you mint a token, the smart-contract uses ChainlinkVRF V2 to determine the breed that the owner gets. </p>
 
@@ -8,10 +8,6 @@
 -   Shiba Inu puppy (30% chance)
 -   St. Bernard puppy (60% chance)
 
----
-
-You can read more about what ChainlinkVRF V2 is by following this [link](https://docs.chain.link/docs/vrf/v2/introduction/).
-
 <br/>
 <p align="center">
 <img src="NFT-metadata/CuteDoggies/images/pug.png" width="225" alt="NFT Pug">
@@ -19,6 +15,12 @@ You can read more about what ChainlinkVRF V2 is by following this [link](https:/
 <img src="NFT-metadata/CuteDoggies/images/st-bernard.png" width="225" alt="NFT St.Bernard">
 </p>
 <br/>
+
+---
+
+You can read more about what ChainlinkVRF V2 is by following this [link](https://docs.chain.link/docs/vrf/v2/introduction/).
+
+---
 
 # Getting Started
 
@@ -83,7 +85,7 @@ npx hardhat coverage
 ## Get one of the CuteDoggies pups
 
 ```bash
-npx hardhat run scripts/buyNFT.ts --network goerli or <YOUR NETWORK NAME>
+npx hardhat run scripts/buyCuteDoggie.ts --network goerli or <YOUR NETWORK NAME>
 ```
 
 ## Withdraw
@@ -92,24 +94,16 @@ npx hardhat run scripts/buyNFT.ts --network goerli or <YOUR NETWORK NAME>
 npx hardhat run scripts/withdraw.ts --network goerli or <YOUR NETWORK NAME>
 ```
 
-## Deployed at goerli:
+# Contributing
 
-> 0x0864ABa35d2e12637721DC10df155261F4a7E525
+Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
 
-| File                        | % Stmts    | % Branch   | % Funcs    | % Lines    | Uncovered Lines  |
-| --------------------------- | ---------- | ---------- | ---------- | ---------- | ---------------- |
-| contracts/                  | 100        | 100        | 100        | 100        |                  |
-| CuteDoggies.sol             | 100        | 100        | 100        | 100        |                  |
-| contracts/mock/             | 100        | 100        | 100        | 100        |                  |
-| VRFCoordinatorV2Mock.sol    | 100        | 100        | 100        | 100        |                  |
-| --------------------------- | ---------- | ---------- | ---------- | ---------- | ---------------- |
-| All files                   | 100        | 100        | 100        | 100        |                  |
-| --------------------------- | ---------- | ---------- | ---------- | ---------- | ---------------- |
+Please make sure to update tests as appropriate.
 
-TODO:
+# Author:
 
--   [ ] README.md
+## [Vladimir Kumalagov](https://github.com/KumaCrypto)
 
-```
+# License
 
-```
+## [MIT](https://choosealicense.com/licenses/mit/)

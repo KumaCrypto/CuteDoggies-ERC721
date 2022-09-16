@@ -22,6 +22,24 @@ You can read more about what ChainlinkVRF V2 is by following this [link](https:/
 
 ---
 
+# Navigation:
+
+-   [Getting Started](https://github.com/KumaCrypto/NFT-fcc#getting-started)
+    -   [Requirements](https://github.com/KumaCrypto/NFT-fcc#requirements)
+    -   [Quickstart](https://github.com/KumaCrypto/NFT-fcc#quickstart)
+-   [Usage](https://github.com/KumaCrypto/NFT-fcc#usage)
+
+    -   [Deploy](https://github.com/KumaCrypto/NFT-fcc#deploy)
+    -   [Deploy](https://github.com/KumaCrypto/NFT-fcc#deploy)
+    -   [Testing](https://github.com/KumaCrypto/NFT-fcc#testing)
+        -   [Test coverage](https://github.com/KumaCrypto/NFT-fcc#test-coverage)
+    -   [Get one of the CuteDoggies pups](https://github.com/KumaCrypto/NFT-fcc#get-one-of-the-cutedoggies-pups)
+    -   [Withdraw](https://github.com/KumaCrypto/NFT-fcc#withdraw)
+
+-   [Contributing](https://github.com/KumaCrypto/NFT-fcc#contributing)
+-   [Author](https://github.com/KumaCrypto/NFT-fcc#author)
+-   [License](https://github.com/KumaCrypto/NFT-fcc#license)
+
 # Getting Started
 
 ## Requirements
@@ -62,13 +80,15 @@ npx hardhat deploy --tags CuteDoggies --network <Your network here>
 npx hardhat deploy
 ```
 
-### Of course you will need a .env file in which you should have the following variables (or your own for different networks):
+#### Of course you will need a .env file in which you should have the following variables (or your own for different networks):
 
 -   _[ YOUR_NETWORK ]RPC_URL_: The url of the node. This argument is required for custom networks.
 
 -   _[ YOUR_NETWORK ]PRIVATE_KEY key or MNEMONIC_: to sign a message.
 
 -   _ETHERSCAN_API_KEY_: for contract verification.
+
+> Remember to change hardhat.config.ts for your variables and networks.
 
 ## Testing
 

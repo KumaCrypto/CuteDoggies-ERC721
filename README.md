@@ -25,11 +25,12 @@ You can read more about what ChainlinkVRF V2 is by following this [link](https:/
 ### Navigation:
 
 -   [Getting Started](https://github.com/KumaCrypto/CuteDoggies-ERC721#getting-started)
+    -   [Disclaimer](https://github.com/KumaCrypto/CuteDoggies-ERC721#disclaimer)
     -   [Requirements](https://github.com/KumaCrypto/CuteDoggies-ERC721#requirements)
     -   [Quickstart](https://github.com/KumaCrypto/CuteDoggies-ERC721#quickstart)
 -   [Usage](https://github.com/KumaCrypto/CuteDoggies-ERC721#usage)
 
-    -   [Deploy images and metadata](https://github.com/KumaCrypto/CuteDoggies-ERC721#deploy)
+    -   [Deploy images and metadata](https://github.com/KumaCrypto/CuteDoggies-ERC721#deploy-images-and-metadata-to-ipfs-using-pinata)
     -   [Deploy](https://github.com/KumaCrypto/CuteDoggies-ERC721#deploy_images_and_metadata_to_ipfs)
     -   [Deploy](https://github.com/KumaCrypto/CuteDoggies-ERC721#deploy)
     -   [Testing](https://github.com/KumaCrypto/CuteDoggies-ERC721#testing)

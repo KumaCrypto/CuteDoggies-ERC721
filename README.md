@@ -29,7 +29,8 @@ You can read more about what ChainlinkVRF V2 is by following this [link](https:/
     -   [Quickstart](https://github.com/KumaCrypto/CuteDoggies-ERC721#quickstart)
 -   [Usage](https://github.com/KumaCrypto/CuteDoggies-ERC721#usage)
 
-    -   [Deploy](https://github.com/KumaCrypto/CuteDoggies-ERC721#deploy)
+    -   [Deploy images and metadata](https://github.com/KumaCrypto/CuteDoggies-ERC721#deploy)
+    -   [Deploy](https://github.com/KumaCrypto/CuteDoggies-ERC721#deploy_images_and_metadata_to_ipfs)
     -   [Deploy](https://github.com/KumaCrypto/CuteDoggies-ERC721#deploy)
     -   [Testing](https://github.com/KumaCrypto/CuteDoggies-ERC721#testing)
         -   [Test coverage](https://github.com/KumaCrypto/CuteDoggies-ERC721#test-coverage)
@@ -41,6 +42,10 @@ You can read more about what ChainlinkVRF V2 is by following this [link](https:/
 -   [License](https://github.com/KumaCrypto/CuteDoggies-ERC721#license)
 
 # Getting Started
+
+## Disclaimer:
+
+> If you do not understand something, be free to open an issue or write me in DM :)
 
 ## Requirements
 
@@ -63,6 +68,12 @@ npm install --save-dev
 ```
 
 # Usage
+
+## Deploy images and metadata to IPFS (using Pinata)
+
+```bash
+npx hardhat run NFT-metadata/scripts/index.ts
+```
 
 ## Deploy
 

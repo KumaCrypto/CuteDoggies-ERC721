@@ -134,7 +134,7 @@ Please make sure to update tests as appropriate.
 
 # Author:
 
-## [Vladimir Kumalagov](https://github.com/KumaCrypto)
+## [❤️Vladimir Kumalagov❤️](https://github.com/KumaCrypto)
 
 # License
 
